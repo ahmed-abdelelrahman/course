@@ -1,10 +1,13 @@
+// glopal variable
 const navbar=document.querySelector(".nav")
 const navlist=document.querySelector(".navcontent")
 const link=document.querySelectorAll(".link")
 const sections=document.querySelectorAll(".sections")
+const topbtn=document.querySelector(".top-btn")
 const arraySections=[...sections]
+
+//  automatic adding navbar when you add additional sections
 function navBar(){
-    
     arraySections.map((section)=>{
         const li =document.createElement('li')
         const tag=document.createElement('a')
@@ -19,6 +22,7 @@ function navBar(){
 }
 navBar()
 
+
 window.addEventListener('scroll',()=>{
     let current='';
     sections.forEach(section=>{
@@ -27,6 +31,8 @@ window.addEventListener('scroll',()=>{
         if(pageYOffset >= (sectiontop-sectionHeight/3)){current=section.getAttribute('id')}
         
     })
+    
+    // add active class to li when related section in viewport
     const lilist =document.querySelectorAll(".navcontent li")
     lilist.forEach(li=>{
         li.classList.remove('active')
@@ -37,6 +43,8 @@ window.addEventListener('scroll',()=>{
     
 });
 let lastScrollY=window.scrollY
+
+// toggle between display and hidden navbar
 window.addEventListener('scroll',()=>{
     if(lastScrollY<window.scrollY){
         navlist.style.display='none'
@@ -46,18 +54,21 @@ window.addEventListener('scroll',()=>{
     }
     lastScrollY=window.scrollY
 })
-window.addEventListener('scroll',()=>{
-    const clientHeight=document.documentElement.clientHeight
-    sections.forEach(section=>{
-        const sectiony=section.getBoundingClientRect().y
-        const sectionHeight=section.getBoundingClientRect().height
-        if(clientHeight>sectiony+sectionHeight*2/3){
-            section.classList.add("sectionactive")
-        }
-    
-    })
-    
+
+// adding active class when section in viewport
+const isInViewport = (section) => {
+  const { top } = section.getBoundingClientRect();
+ 
+  section.classList.toggle('active', top >= 0);
+}
+const toggleActiveClass = () => {
+  sections.forEach(isInViewport);
+}
+document.addEventListener('scroll', toggleActiveClass);
+
+// scroll to top button
+
+topbtn.addEventListener('click',()=>{
+navbar.scrollIntoView(false)    
 })
-
-
 

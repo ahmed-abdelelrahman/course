@@ -28,7 +28,7 @@ ul {
   a{text-decoration: none;}
   
   .active {
-    background-color: green;
+    background-color: rgb(51, 167, 51);
   }
 .container{
     padding: 0 50px;
@@ -56,7 +56,6 @@ section{
     grid-template-rows: 100px 1fr;
     align-items: center;
     justify-content: right;
-    grid-template-columns: repeat(aut-fill,minmax(400px,600px))  ;
     transition: .3s;
 }
 section >h2{
@@ -75,4 +74,22 @@ section >h2{
   font-size: 50px;
   border-top: 1px solid white;
   padding: 20px;
+}
+.top-btn{
+  position: fixed;
+  bottom: 10px;
+  z-index: 1;
+  right: 10px;
+  background: red;
+  color: black;
+  padding: 10px;
+  font-size: larger;
+  cursor: pointer;
+}
+@media screen and (max-width: 600px) {
+  body{
+    font-size: x-large;
+    padding: 10px;
+  }
+  /* responsive */
 }
