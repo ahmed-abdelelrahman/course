@@ -37,7 +37,9 @@ window.addEventListener('scroll',()=>{
     lilist.forEach(li=>{
         li.classList.remove('active')
         if(li.classList.contains(current)){
+
             li.classList.add('active')
+            
     }
     })
     
@@ -56,16 +58,21 @@ window.addEventListener('scroll',()=>{
 })
 
 // adding active class when section in viewport
-const isInViewport = (section) => {
-  const { top } = section.getBoundingClientRect();
- 
-  section.classList.toggle('active', top >= 0);
-}
-const toggleActiveClass = () => {
-  sections.forEach(isInViewport);
-}
-document.addEventListener('scroll', toggleActiveClass);
+window.onscroll = function() {
+	document.querySelectorAll("section").forEach(function(active) {
+	if(active.getBoundingClientRect().top >= -400 && active.getBoundingClientRect().top <= 150){
 
+    active.classList.add("your-active-class");
+    
+
+    }
+    else{
+         active.classList.remove("your-active-class");
+    }
+	});
+}
+
+ 
 // scroll to top button
 
 topbtn.addEventListener('click',()=>{
