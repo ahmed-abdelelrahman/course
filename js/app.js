@@ -5,6 +5,7 @@ const link=document.querySelectorAll(".link")
 const sections=document.querySelectorAll(".sections")
 const topbtn=document.querySelector(".top-btn")
 const arraySections=[...sections]
+const togglebutton=document.querySelector(".toggle-button")
 
 //  automatic adding navbar when you add additional sections
 function navBar(){
@@ -14,7 +15,9 @@ function navBar(){
         const sectionName=section.getAttribute('data-nav')
         const sectionNamePart = sectionName.replace(/\s/g, '').toLowerCase();
         tag.setAttribute('href','#'+sectionNamePart)
-        li.setAttribute('class',sectionNamePart)
+        tag.setAttribute('data-set',sectionNamePart)
+        
+        li.setAttribute('class','itemSection' +' ' +sectionNamePart)
         tag.innerText=sectionName
         li.appendChild(tag);
         navlist.appendChild(li);
@@ -22,6 +25,18 @@ function navBar(){
 }
 navBar()
 
+// smooth scroll to specific seciton
+navbar.addEventListener('click',(e)=>{
+    e.preventDefault()
+    console.log(e.target.dataset.set)
+    if(e.target.dataset.set){
+        document.getElementById(`${e.target.dataset.set}`)
+        .scrollIntoView({behavior:"smooth"})
+    }
+    setTimeout(()=>{
+        location.hash=`${e.target.dataset.set}`
+    },300)
+})
 
 window.addEventListener('scroll',()=>{
     let current='';
@@ -47,15 +62,15 @@ window.addEventListener('scroll',()=>{
 let lastScrollY=window.scrollY
 
 // toggle between display and hidden navbar
-window.addEventListener('scroll',()=>{
-    if(lastScrollY<window.scrollY){
-        navlist.style.display='none'
-    }
-    else{
-        navlist.style.display='flex'
-    }
-    lastScrollY=window.scrollY
-})
+// window.addEventListener('scroll',()=>{
+//     if(lastScrollY<window.scrollY){
+//         navlist.style.display='none'
+//     }
+//     else{
+//         navlist.style.display='flex'
+//     }
+//     lastScrollY=window.scrollY
+// })
 
 // adding active class when section in viewport
 window.onscroll = function() {
@@ -79,3 +94,7 @@ topbtn.addEventListener('click',()=>{
 navbar.scrollIntoView(false)    
 })
 
+// bar button in small screen
+togglebutton.addEventListener('click',()=>{
+    navlist.classList.toggle('active')
+})
