@@ -28,7 +28,6 @@ navBar()
 // smooth scroll to specific seciton
 navbar.addEventListener('click',(e)=>{
     e.preventDefault()
-    console.log(e.target.dataset.set)
     if(e.target.dataset.set){
         document.getElementById(`${e.target.dataset.set}`)
         .scrollIntoView({behavior:"smooth"})
